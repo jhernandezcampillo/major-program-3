@@ -6,11 +6,11 @@
 package spacegame;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -20,25 +20,32 @@ import javafx.stage.Stage;
 public class SpaceGame extends Application {
     
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
+    public void start(Stage pStage) {
+        GamePane root = new GamePane();
+        BorderPane bp = new BorderPane();
+        HBox controlPane = new HBox();
+
+        Button startB = new Button("Start");
+        startB.setOnAction(e -> {root.startGame(); root.requestFocus();});
+        Button restartB = new Button("Restart");
+        restartB.setOnAction(e -> {root.restartGame(); root.requestFocus();});
+        Button exitB = new Button("Exit");
+        exitB.setOnAction(e -> {System.exit(0); root.requestFocus();});
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
+        controlPane.getChildren().addAll(startB, restartB, exitB);
+        controlPane.setAlignment(Pos.CENTER);
+        root.setBottom(controlPane);
         
-        Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        bp.setTop(root);
+        bp.setBottom(controlPane);
+        
+        Scene scene = new Scene(bp, 560, 630);
+        
+        pStage.setTitle("Space Invaders");
+        pStage.setScene(scene);
+        root.requestFocus();
+        pStage.show();
     }
 
     /**

@@ -11,4 +11,10 @@ package spacegame;
  */
 public interface Movable {
 
+    public void move();
+    final int EAST = 0;
+    final int WEST = 180;
+    final int NORTH = 270;
+    final int SOUTH = 90;
+        
 }

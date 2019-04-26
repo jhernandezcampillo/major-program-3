@@ -5,10 +5,15 @@
  */
 package spacegame;
 
+import javafx.scene.layout.Pane;
+
 /**
  *
  * @author Judith
  */
-public class ActionPane {
+public class ActionPane extends Pane{
     
+    public ActionPane(){
+        
+    }
 }
